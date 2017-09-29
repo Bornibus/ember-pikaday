@@ -162,7 +162,7 @@ export default Ember.Mixin.create({
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
     }
 
-    this.get('onSelection')(selectedDate);
+    this.get('onSelection')(this.get('pikaday'), selectedDate);
   },
 
   determineYearRange: function() {
