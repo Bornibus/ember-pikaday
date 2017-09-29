@@ -12,7 +12,7 @@ const assign = Ember.assign || Ember.merge;
 
 export default Ember.Mixin.create({
 
-  _options: Ember.computed('options', 'i18n', {
+  _options: Ember.computed('options', 'i18n', 'i18n.locale', {
     get() {
       let options = this._defaultOptions();
 
@@ -23,7 +23,7 @@ export default Ember.Mixin.create({
             nextMonth     : this.get('i18n').t('nextMonth').toString(),
             months        : this.get('i18n').t('months').toString().split(','),
             weekdays      : this.get('i18n').t('weekdays').toString().split(','),
-            weekdaysShort : this.get('i18n').t('weekdaysShort').toString().split(',')
+            weekdaysShort : this.get('i18n').t('weekdaysMin').toString().split(',')
           };
         } else {
           options.i18n = this.get('i18n');
@@ -57,6 +57,7 @@ export default Ember.Mixin.create({
       yearRange: this.determineYearRange(),
       minDate: this.get('minDate') || null,
       maxDate: this.get('maxDate') || null,
+      showDaysInNextAndPreviousMonths: true,
       theme: this.get('theme') || null
     };
   },
