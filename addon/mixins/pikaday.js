@@ -90,6 +90,9 @@ export default Ember.Mixin.create({
 
     this.set('pikaday', pikaday);
     this.setPikadayDate();
+    if (this.get('onCreate')) {
+      this.get('onCreate')(this.get('pikaday'));
+    }
   },
 
   willDestroyElement() {
@@ -162,7 +165,7 @@ export default Ember.Mixin.create({
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
     }
 
-    this.get('onSelection')(this.get('pikaday'), selectedDate);
+    this.get('onSelection')(selectedDate);
   },
 
   determineYearRange: function() {
