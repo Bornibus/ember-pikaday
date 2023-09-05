@@ -163,7 +163,7 @@ export default Ember.Mixin.create({
 
     if (this.get('useUTC')) {
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
-    } else {
+    } else if (moment.defaultZone) {
       selectedDate = moment.tz([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()], moment.defaultZone.name).toDate();
     }
 
