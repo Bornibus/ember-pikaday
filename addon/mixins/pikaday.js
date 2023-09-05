@@ -168,7 +168,7 @@ export default Ember.Mixin.create({
       finalOffset = moment().utcOffset() + selectedDate.getTimezoneOffset();
       displayDate = new Date(selectedDate.getTime() + finalOffset * 60 * 1000);
       console.log(displayDate);
-      this.get('pikaday').setDate(displayDate);
+      this.get('pikaday').setDate(displayDate, true);
     }
 
     this.get('onSelection')(selectedDate);
