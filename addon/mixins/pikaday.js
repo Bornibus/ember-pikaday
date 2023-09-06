@@ -164,13 +164,7 @@ export default Ember.Mixin.create({
     if (this.get('useUTC')) {
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
     } else if (moment.defaultZone) {
-      console.log('date before modifs : ');
-      console.log(selectedDate);
       selectedDate = moment([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
-      // finalOffset = moment().utcOffset() + selectedDate.getTimezoneOffset();
-      // displayDate = new Date(selectedDate.getTime() + finalOffset * 60 * 1000);
-      console.log('date after modifs : ');
-      console.log(selectedDate);
       this.get('pikaday').setDate(selectedDate, true);
     }
 
