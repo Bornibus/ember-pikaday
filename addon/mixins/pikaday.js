@@ -59,21 +59,6 @@ export default Ember.Mixin.create({
       maxDate: this.get('maxDate') || null,
       showDaysInNextAndPreviousMonths: true,
       theme: this.get('theme') || null,
-      parse: (dateString) => {
-        // const parsedDate = Date.parse(dateString.replace(/-/g, '/'));
-        // if (moment.defaultZone) {
-        //   selectedDate = moment.tz([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()], moment.defaultZone.name).toDate();
-        //   finalOffset = moment().utcOffset() + selectedDate.getTimezoneOffset();
-        //   displayDate = new Date(selectedDate.getTime() + finalOffset * 60 * 1000);
-        //   console.log(displayDate);
-        //   this.get('pikaday').setDate(displayDate, true);
-        // } else {
-        //   return parsedDate;
-        // }
-        const parsedDate = Date.parse(dateString.replace(/-/g, '/'));
-
-        return Number.isNaN(parsedDate) ? new Date() : new Date(parsedDate);
-      },
     };
   },
 
@@ -175,17 +160,19 @@ export default Ember.Mixin.create({
 
   userSelectedDate: function() {
     var selectedDate = this.get('pikaday').getDate();
-
+    console.log(selectedDate);
     if (this.get('useUTC')) {
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
+    } else if (moment.defaultZone) {
+      console.log('date before modifs : ');
+      console.log(selectedDate);
+      selectedDate = moment([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
+      // finalOffset = moment().utcOffset() + selectedDate.getTimezoneOffset();
+      // displayDate = new Date(selectedDate.getTime() + finalOffset * 60 * 1000);
+      console.log('date after modifs : ');
+      console.log(selectedDate);
+      this.get('pikaday').setDate(selectedDate, true);
     }
-    // else if (moment.defaultZone) {
-    //   selectedDate = moment.tz([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()], moment.defaultZone.name).toDate();
-    //   finalOffset = moment().utcOffset() + selectedDate.getTimezoneOffset();
-    //   displayDate = new Date(selectedDate.getTime() + finalOffset * 60 * 1000);
-    //   console.log(displayDate);
-    //   this.get('pikaday').setDate(displayDate, true);
-    // }
 
     this.get('onSelection')(selectedDate);
   },
