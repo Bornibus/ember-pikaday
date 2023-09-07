@@ -58,7 +58,7 @@ export default Ember.Mixin.create({
       minDate: this.get('minDate') || null,
       maxDate: this.get('maxDate') || null,
       showDaysInNextAndPreviousMonths: true,
-      theme: this.get('theme') || null,
+      theme: this.get('theme') || null
     };
   },
 
@@ -160,7 +160,6 @@ export default Ember.Mixin.create({
 
   userSelectedDate: function() {
     var selectedDate = this.get('pikaday').getDate();
-    console.log(selectedDate);
     if (this.get('useUTC')) {
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
     } else if (moment.defaultZone) {
